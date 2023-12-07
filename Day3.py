@@ -2,6 +2,7 @@ def main(inputdata):
     with open(inputdata,"r") as data:
         data = data.readlines()
     symbolIndexes = GetSymbolIndexes(data)
+    GetSurroundingNumbers(data,symbolIndexes[0])
         
 def GetSymbolIndexes(data):    
     symbolIndexes = []
@@ -16,9 +17,13 @@ def GetSymbolIndexes(data):
     # print(symbolIndexes)
     return symbolIndexes
  
-def GetSurroundingNumbers(indexOfASymbol):
+def GetSurroundingNumbers(data,indexOfASymbol):
     xCoord,yCoord = indexOfASymbol[0],indexOfASymbol[1]
+    numbers = []
     for y in [-1,0,1]:
         for x in [-1,0,1]:
-            if 
-GetSurroundingNumbers((1,3))
+            if data[yCoord+y][xCoord+x].isdigit():
+                numbers.append((yCoord+y,xCoord+x))
+    print(numbers)
+
+main("day3testdatainput.txt")
