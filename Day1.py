@@ -45,7 +45,7 @@ def getNum2(line):
 
 def mainv2():
 	sum = 0
-	with open("input.txt", "r") as data:
+	with open("than.txt", "r") as data:
 		data = data.read().strip().split("\n")
 		for index in range(len(data)):
 			#print(index)
@@ -53,6 +53,7 @@ def mainv2():
 			sum += int(getNum2(data[index]))
 	print(sum)
 # print(getNum("mbvtbcjvv33rqfsllshb"))
-main()
+# main()
 # print(getNum2("two1nine"))
-mainv2()
+# mainv2()
+# print(getNum2("28gtbkszmrtmnineoneightmx"))

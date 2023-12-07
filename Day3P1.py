@@ -9,14 +9,19 @@ def main(inputdata):
             if coordinate not in numberIndexes:
                 numberIndexes.append(coordinate)
     numberIndexes.sort()
-    answer_dict = {}
+    for eachitem in numberIndexes:
+        # print(eachitem)
+        i = 1
+        while (eachitem[0],eachitem[1]+ i) in numberIndexes:
+            numberIndexes.remove((eachitem[0],eachitem[1]+i))
+            i += 1
+    answer_list = []
     finalAns = 0
     for eachNum in numberIndexes:
         currNum = GetNumbersFromIndexes(data,eachNum)
-        if currNum not in answer_dict:
-            answer_dict[currNum] = 1
-    print(answer_dict)
-    for eachAnswer in answer_dict:
+        answer_list.append(currNum)
+    # print(answer_list)
+    for eachAnswer in answer_list:
         # print(eachAnswer)
         finalAns += int(eachAnswer)
     print(finalAns)
