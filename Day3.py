@@ -2,7 +2,24 @@ def main(inputdata):
     with open(inputdata,"r") as data:
         data = data.readlines()
     symbolIndexes = GetSymbolIndexes(data)
-    GetSurroundingNumbers(data,symbolIndexes[0])
+    numberIndexes = []
+    for index in range(len(symbolIndexes)):
+        eachNumIndex = GetSurroundingNumbersIndexes(data,symbolIndexes[index])
+        for coordinate in eachNumIndex:
+            if coordinate not in numberIndexes:
+                numberIndexes.append(coordinate)
+    numberIndexes.sort()
+    answer_dict = {}
+    finalAns = 0
+    for eachNum in numberIndexes:
+        currNum = GetNumbersFromIndexes(data,eachNum)
+        if currNum not in answer_dict:
+            answer_dict[currNum] = 1
+    print(answer_dict)
+    for eachAnswer in answer_dict:
+        # print(eachAnswer)
+        finalAns += int(eachAnswer)
+    print(finalAns)
         
 def GetSymbolIndexes(data):    
     symbolIndexes = []
@@ -17,13 +34,51 @@ def GetSymbolIndexes(data):
     # print(symbolIndexes)
     return symbolIndexes
  
-def GetSurroundingNumbers(data,indexOfASymbol):
-    xCoord,yCoord = indexOfASymbol[0],indexOfASymbol[1]
+def GetSurroundingNumbersIndexes(data,indexOfASymbol):
+    # print(indexOfASymbol)
+    yCoord,xCoord = indexOfASymbol[0],indexOfASymbol[1]
+    # print("x coord is {} and y coord is {}".format(xCoord,yCoord))
     numbers = []
     for y in [-1,0,1]:
         for x in [-1,0,1]:
             if data[yCoord+y][xCoord+x].isdigit():
+                # print("yes at {},{},{} is a number".format(yCoord+y,xCoord+x,data[yCoord+y][xCoord+x]))
                 numbers.append((yCoord+y,xCoord+x))
-    print(numbers)
+    return(numbers)
 
-main("day3testdatainput.txt")
+def GetNumbersFromIndexes(data,numberIndex):
+    yCoord,xCoord = numberIndex[0],numberIndex[1]
+    number = ""
+    midDigit = False
+
+    # This checks whether there are digits to the right or left and use this information to obtain the digits surrounding it
+    if xCoord == 0:
+        towardsRightNumber = True
+    elif xCoord == len(data[0]) - 1:
+        towardsRightNumber = False
+    elif data[yCoord][xCoord+1].isdigit() and data[yCoord][xCoord-1].isdigit():
+        midDigit = True
+    elif data[yCoord][xCoord+1].isdigit():
+        towardsRightNumber = True
+    else:
+        towardsRightNumber = False
+
+    if midDigit:
+        leftP,rightP = xCoord-1,xCoord
+        while leftP > -1 and data[yCoord][leftP].isdigit():
+            number = data[yCoord][leftP] + number
+            leftP -= 1
+        while rightP < len(data[0]) - 1 and data[yCoord][rightP].isdigit():
+            number += data[yCoord][rightP]
+            rightP += 1
+    elif towardsRightNumber:
+        while xCoord < len(data[0]) - 1 and data[yCoord][xCoord].isdigit():
+            number += data[yCoord][xCoord]
+            xCoord += 1    
+    elif not towardsRightNumber:
+        while xCoord > - 1 and data[yCoord][xCoord].isdigit():
+            number = data[yCoord][xCoord] + number
+            xCoord -= 1
+
+    return(number)
+main("day3input.txt")
