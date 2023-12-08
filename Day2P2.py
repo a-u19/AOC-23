@@ -1,6 +1,5 @@
 from openFile import OpenFile
 
-
 def main(input):
     data = OpenFile(input)
     ans = []
