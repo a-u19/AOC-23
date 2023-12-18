@@ -44,7 +44,7 @@ def main(input):
     hands = re.findall(regex, OpenFile(input))
     # print(hands)
     hands.sort(key=cmp_to_key(CompareSameRanks))
-    print(hands)
+    # print(hands)
     total = 0
     for i,each_hand in enumerate(hands,1):
         total += (i * int(each_hand[1]))

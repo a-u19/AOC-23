@@ -51,10 +51,8 @@ def main(input):
     hands.sort(key=cmp_to_key(CompareSameRanks))
     # print(hands)
     total = 0
-    # for i,each_hand in enumerate(hands,1):
-    #     total += (i * int(each_hand[1]))
-    for rank, (_, bid) in enumerate(hands, start=1):
-        total += rank * int(bid)
+    for i,each_hand in enumerate(hands,1):
+        total += (i * int(each_hand[1]))
     print(total)
         
 main("day7input.txt")
