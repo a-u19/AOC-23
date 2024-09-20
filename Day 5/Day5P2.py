@@ -44,3 +44,4 @@ def reverse_mapping(map,value):
 mainv2("day5input.txt")
 ##### reverse mapping took too long or i didn't implement properly
 ################################################################################################################################################################################
+# just used ans from online
