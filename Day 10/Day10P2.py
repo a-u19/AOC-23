@@ -1,0 +1,1 @@
+# involves understanding the shoelace algorithm and pick's theorem / floodfill algorithm
